@@ -4,6 +4,10 @@
 
 Plannr Bot is a discord bot for scheduling events and enabling participation by allowing users to sign up for events.
 
+### Architecture
+
+Documentation on architecture of plannr-bot and interaction with supporting services can be found [here](doc/architecture.md).
+
 ## Development Environment Setup
 
 ### Dependencies
