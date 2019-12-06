@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Leiningen: discord.clj:2.0.0">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/discord/clj/discord.clj/2.0.0/discord.clj-2.0.0.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
