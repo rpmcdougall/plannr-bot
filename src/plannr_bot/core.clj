@@ -1,7 +1,8 @@
 (ns plannr-bot.core
-  (:gen-class))
+  (:gen-class)
+  (:require [discord.bot :as bot]))
 
 (defn -main
-  "I don't do a whole lot ... yet."
+  ;;"TODO: Implement Interaction with watch service from libs"
   [& args]
-  (println "Hello, World!"))
+  (bot/start))
