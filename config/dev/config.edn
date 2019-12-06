@@ -1,0 +1,3 @@
+{:db_user "plannr"
+ :db_pass "plannr"
+ :db_conn "//localhost:5432/plannr"}
