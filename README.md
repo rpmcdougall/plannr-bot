@@ -55,8 +55,8 @@ plannr-bot uses [hugsql](https://github.com/layerware/hugsql) for interacting wi
 ### Available Commands
 Plan Event: Creates a new event and PM's the scheduler back with the details.
 ```
-!plan-event <event-name> <start date/time>
-Example: !plan-event Fragfest 12/10/2019 05:00
+!plan-event <event-name> | <start date/time>
+Example: !plan-event Fragfest | 12/10/2019 05:00
 ```
 
 
