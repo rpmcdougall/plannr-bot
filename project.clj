@@ -5,7 +5,13 @@
             :url "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [discord.clj "2.0.0"]
-                 [amperity/greenlight "0.1.7"]]
+                 [amperity/greenlight "0.1.7"]
+                 [com.taoensso/carmine "2.19.1"]
+                 [com.layerware/hugsql "0.5.1"]
+                 [org.postgresql/postgresql "9.4.1207"]
+                 [yogthos/config "1.1.7"]]
   :main ^:skip-aot plannr-bot.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:uberjar {:aot :all}
+             :prod {:resource-paths ["config/prod"]}
+             :dev  {:resource-paths ["config/dev"]}})
