@@ -1,0 +1,8 @@
+{
+   :db_user "plannr"
+   :db_pass "plannr"
+   :db_conn "//localhost:5432/plannr"
+   :q_host "127.0.0.1"
+   :q_port 6379
+   :q_pass "plannr"
+ }
