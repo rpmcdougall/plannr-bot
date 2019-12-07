@@ -11,3 +11,19 @@ SELECT *
 -- :doc Inserts a single event
 insert into plannr_event (event_id, event_name, host, attendees, event_time)
 values (:event_id, :event_name, :host, :attendees, :event_time)
+
+
+-- :name update-event-attendees :! :n
+-- :doc Adds additional attendees to an event
+update plannr_event
+set attendees = array_cat(attendees, :attendee)
+where event_name = :event_name
+
+
+-- A ":result" value of ":1" specifies a single record
+-- (as a hashmap) will be returned
+-- :name fetch-event-by-name :? :1
+-- :doc Gets a single event by name
+SELECT *
+  FROM plannr_event
+  WHERE event_name = :event_name

@@ -32,3 +32,21 @@
                    :event_time  (f/parse (f/formatter "MM/dd/YYYY HH:mm") (:event_time event-object))}]
     (update (sql/insert-event db new-event) :event_time c/to-string)))
 
+
+(defn parse-join
+  "Handles parsing from discord message for join event"
+  [message-object]
+  (let [event-object {:event_name (trim-outer (:content message-object))
+                      :attendee [(:username (:author message-object))]}]
+    event-object))
+
+(defn update-attendees
+  "Publishes update to attendees list"
+  [event-object]
+  (sql/update-event-attendees db event-object))
+
+(defn fetch-event
+  "Fetches a specified event."
+  [event-name]
+  (update (sql/fetch-event-by-name db {:event_name event-name}) :event_time c/to-string))
+

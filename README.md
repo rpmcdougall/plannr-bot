@@ -59,5 +59,11 @@ Plan Event: Creates a new event and PM's the scheduler back with the details.
 Example: !plan-event Fragfest | 12/10/2019 05:00
 ```
 
+Join Event: Allows user to add themselves as an attendee to an event
+```
+!join-event <event-name>
+Example !join-event Hackathon December 2019
+```
+
 
 
