@@ -26,6 +26,12 @@
   (is (= (:event_time result) "12/10/2019 05:00"))
   )
 
+(deftest parse-join
+  "Test parsing of the join command"
+  (def result (plannr-bot.handler.messages/parse-join {:content "Test Event" :author {:username "leetgamer1337"}}))
+  (is (= (:event_name result) "Test Event"))
+  (is (= (:attendee result)  ["leetgamer1337"]))
+  )
 
 (deftest trim-outer-test
   "Test outer trim utility function"
