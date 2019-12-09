@@ -26,7 +26,7 @@
 
 (bot/defcommand plan-event
                 [client message]
-                "Creates a new event. !join-event event-name | event-time"
+                "Creates a new event. !plan-event event-name | event-time"
                 (def event-created (event-handler/publish-event (event-handler/parse-event message)) )
                 (bot/pm (format "Your event %s has been been created and will occur at %s. Have fun!"
                                  (:event_name event-created) (:event_time event-created))))
