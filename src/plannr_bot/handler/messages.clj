@@ -19,8 +19,7 @@
 (defn handle-seq-output
   "Turns a sequence into a newline delimeted string of events"
   [events]
-  (clojure.string/join "\n" (map mk-map-string events))
-  )
+  (clojure.string/join "\n" (map mk-map-string events)))
 
 (defn parse-event
   "Handles parsing from discord message data into an event object."
