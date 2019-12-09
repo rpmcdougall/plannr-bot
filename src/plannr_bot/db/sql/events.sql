@@ -6,6 +6,14 @@ SELECT *
   FROM plannr_event
 
 
+-- A ":result" value of ":*" specifies a vector of records
+-- (as hashmaps) will be returned
+-- :name events-listing :? :*
+-- :doc Get all events
+SELECT event_name, event_time
+  FROM plannr_event
+
+
 -- A :result value of :n below will return affected row count:
 -- :name insert-event :insert :raw
 -- :doc Inserts a single event
@@ -27,3 +35,7 @@ where event_name = :event_name
 SELECT *
   FROM plannr_event
   WHERE event_name = :event_name
+
+
+-- :name delete-event-by-event-name :! :n
+delete from plannr_event where event_name = :event_name
