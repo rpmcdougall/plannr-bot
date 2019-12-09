@@ -2,7 +2,9 @@
   (:gen-class)
   (:require [discord.bot :as bot]
             [plannr-bot.handler.messages :as event-handler]
-            [clj-time.coerce :as c]))
+            [clj-time.coerce :as c]
+            [discord.utils :as utils]
+            [discord.embeds :as embeds]))
 
 
 (defn -main
@@ -17,7 +19,9 @@
                 [client message]
                 "Lists available events. !list-events"
                 (def events (event-handler/fetch-events))
-                (bot/pm events))
+                (bot/pm (-> (embeds/create-embed :title "Events"
+                                                  :color (utils/rgb->integer 0 255 255))
+                            (embeds/+field "Events" events))))
 
 
 (bot/defcommand plan-event

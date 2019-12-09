@@ -11,6 +11,17 @@
   "Trims outer whitepsace from a string."
   (comp str/trimr str/triml))
 
+(defn mk-map-string
+  "Format event into string"
+  [event]
+  (format "%s @ %s" (:event_name event) (:event_time event)))
+
+(defn handle-seq-output
+  "Turns a sequence into a newline delimeted string of events"
+  [events]
+  (clojure.string/join "\n" (map mk-map-string events))
+  )
+
 (defn parse-event
   "Handles parsing from discord message data into an event object."
   [message-object]
@@ -65,5 +76,11 @@
   "Fetches all events"
   []
   (def result (sql/events-listing db))
-  (clojure.pprint/pprint result)
-  (result))
+  (def parsed (handle-seq-output result))
+  parsed)
+
+
+
+
+
+

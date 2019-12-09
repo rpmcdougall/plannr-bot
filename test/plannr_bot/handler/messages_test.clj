@@ -33,6 +33,19 @@
   (is (= (:attendee result)  ["leetgamer1337"]))
   )
 
+(deftest mk-map-string
+  "Tests parsing of event listing into string output"
+  (def result (plannr-bot.handler.messages/mk-map-string {:event_name "Smoked BBQ Pit Extravaganza"
+                                                          :event_time "2019-12-10T07:00:00.000Z"}))
+  (is (= result "Smoked BBQ Pit Extravaganza @ 2019-12-10T07:00:00.000Z")))
+
+(deftest handle-seq-output
+  "Tests parsing of event listing into string output"
+  (def result (plannr-bot.handler.messages/handle-seq-output [{:event_name "Smoked BBQ Pit Extravaganza"
+                :event_time "2019-12-10T07:00:00.000Z"} {:event_name "Smoked BBQ Pit Extravaganza"
+                                                         :event_time "2019-12-10T07:00:00.000Z"}]) )
+  (is (= result "Smoked BBQ Pit Extravaganza @ 2019-12-10T07:00:00.000Z\nSmoked BBQ Pit Extravaganza @ 2019-12-10T07:00:00.000Z")))
+
 (deftest trim-outer-test
   "Test outer trim utility function"
   (is (= "test test" (plannr-bot.handler.messages/trim-outer " test test "))))
