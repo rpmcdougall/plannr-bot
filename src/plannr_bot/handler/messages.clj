@@ -11,6 +11,16 @@
   "Trims outer whitepsace from a string."
   (comp str/trimr str/triml))
 
+(defn mk-map-string
+  "Format event into string"
+  [event]
+  (format "%s @ %s" (:event_name event) (:event_time event)))
+
+(defn handle-seq-output
+  "Turns a sequence into a newline delimeted string of events"
+  [events]
+  (clojure.string/join "\n" (map mk-map-string events)))
+
 (defn parse-event
   "Handles parsing from discord message data into an event object."
   [message-object]
@@ -40,6 +50,17 @@
                       :attendee [(:username (:author message-object))]}]
     event-object))
 
+(defn parse-cancel
+  "Handles parsing from discord message for cancel event"
+  [message-object]
+  (let [event-object {:event_name (trim-outer (:content message-object))}]
+    event-object))
+
+(defn cancel-event
+  "Removes and event from the table"
+  [event-object]
+  (sql/delete-event-by-event-name db event-object))
+
 (defn update-attendees
   "Publishes update to attendees list"
   [event-object]
@@ -49,4 +70,16 @@
   "Fetches a specified event."
   [event-name]
   (update (sql/fetch-event-by-name db {:event_name event-name}) :event_time c/to-string))
+
+(defn fetch-events
+  "Fetches all events"
+  []
+  (def result (sql/events-listing db))
+  (def parsed (handle-seq-output result))
+  parsed)
+
+
+
+
+
 
