@@ -59,13 +59,13 @@ Plan Event: Creates a new event and PM's the scheduler back with the details.
 Example: !plan-event Fragfest | 12/10/2019 05:00
 ```
 
-Join Event: Allows user to add themselves as an attendee to an event and PM's the scheduler back with the details
+Join Event: Allows user to add themselves as an attendee to an event and PM's the attendee back with the details
 ```
 !join-event <event-name>
 Example !join-event Hackathon December 2019
 ```
 
-List Events: Allows user to list all available events in plannr-bot and PM's the scheduler back with the details
+List Events: Allows user to list all available events in plannr-bot and PM's the requestor back with the details
 ```
 !list-events 
 Example !list-events
