@@ -11,15 +11,20 @@
   "Trims outer whitepsace from a string."
   (comp str/trimr str/triml))
 
-(defn mk-map-string
+(defn mk-map-string-event
   "Format event into string"
   [event]
   (format "%s @ %s" (:event_name event) (:event_time event)))
 
-(defn handle-seq-output
+(defn handle-lazy-seq-output-event
   "Turns a sequence into a newline delimeted string of events"
   [events]
-  (clojure.string/join "\n" (map mk-map-string events)))
+  (clojure.string/join "\n" (map mk-map-string-event events)))
+
+(defn handle-lazy-seq-output-roster
+  "Turns a sequence into a newline delimeted string of events"
+  [roster]
+  (clojure.string/join "\n" (:attendees (nth roster 0))))
 
 (defn parse-event
   "Handles parsing from discord message data into an event object."
@@ -48,8 +53,8 @@
                       :attendee [(:username (:author message-object))]}]
     event-object))
 
-(defn parse-cancel
-  "Handles parsing from discord message for cancel-event."
+(defn parse-basic
+  "Handles parsing from discord message for event name only messages."
   [message-object]
   (let [event-object {:event_name (trim-outer (:content message-object))}]
     event-object))
@@ -73,7 +78,7 @@
   "Fetches all events"
   []
   (def result (sql/events-listing db))
-  (def parsed (handle-seq-output result))
+  (def parsed (handle-lazy-seq-output-event result))
   parsed)
 
 (defn parse-leave-event
@@ -88,6 +93,8 @@
   "Removes an attendee from an event."
   (sql/delete-attendee-by-event-name db event-object))
 
-
-
-
+(defn fetch-attendees
+  [event-object]
+  "Retrieves list of attendees for a given event."
+  (def attendees (handle-lazy-seq-output-roster (sql/fetch-attendees-by-event db event-object)))
+  attendees)

@@ -37,16 +37,21 @@
 
 (deftest mk-map-string
   "Tests parsing of event listing into string output"
-  (def result (plannr-bot.handler.messages/mk-map-string {:event_name "Smoked BBQ Pit Extravaganza"
-                                                          :event_time "2019-12-10T07:00:00.000Z"}))
+  (def result (plannr-bot.handler.messages/mk-map-string-event {:event_name "Smoked BBQ Pit Extravaganza"
+                                                                :event_time "2019-12-10T07:00:00.000Z"}))
   (is (= result "Smoked BBQ Pit Extravaganza @ 2019-12-10T07:00:00.000Z")))
 
-(deftest handle-seq-output
+(deftest handle-seq-output-event
   "Tests parsing of event listing into string output"
-  (def result (plannr-bot.handler.messages/handle-seq-output [{:event_name "Smoked BBQ Pit Extravaganza"
-                                                               :event_time "2019-12-10T07:00:00.000Z"} {:event_name "Smoked BBQ Pit Extravaganza"
-                                                                                                        :event_time "2019-12-10T07:00:00.000Z"}]))
+  (def result (plannr-bot.handler.messages/handle-lazy-seq-output-event [{:event_name "Smoked BBQ Pit Extravaganza"
+                                                                          :event_time "2019-12-10T07:00:00.000Z"} {:event_name "Smoked BBQ Pit Extravaganza"
+                                                                                                                   :event_time "2019-12-10T07:00:00.000Z"}]))
   (is (= result "Smoked BBQ Pit Extravaganza @ 2019-12-10T07:00:00.000Z\nSmoked BBQ Pit Extravaganza @ 2019-12-10T07:00:00.000Z")))
+
+(deftest handle-seq-output-roster
+  "Test parsing roster list into string output"
+  (def result (plannr-bot.handler.messages/handle-lazy-seq-output-roster (lazy-seq [{:attendees ["gal" "guy"]}])))
+  (is (= result "gal\nguy")))
 
 (deftest trim-outer-test
   "Test outer trim utility function"
