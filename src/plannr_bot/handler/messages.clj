@@ -49,7 +49,7 @@
     event-object))
 
 (defn parse-cancel
-  "Handles parsing from discord message for cancel event"
+  "Handles parsing from discord message for cancel-event."
   [message-object]
   (let [event-object {:event_name (trim-outer (:content message-object))}]
     event-object))
@@ -77,6 +77,17 @@
   parsed)
 
 
+(defn parse-leave-event
+  "Handles parsing a discord message object for leave event."
+  [message-object]
+  (let [event-object {:event_name (:content message-object)
+                      :attendee (:username (:author message-object))}]
+    event-object))
+
+(defn remove-attendee
+  [event-object]
+  "Removes an attendee from an event."
+  (sql/delete-attendee-by-event-name db event-object))
 
 
 

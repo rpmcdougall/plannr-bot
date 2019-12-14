@@ -39,3 +39,9 @@ SELECT *
 
 -- :name delete-event-by-event-name :! :n
 delete from plannr_event where event_name = :event_name
+
+
+-- :name delete-attendee-by-event-name :! :n
+update plannr_event
+set attendees = array_remove(attendees, :attendee)
+where event_name = :event_name

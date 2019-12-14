@@ -44,5 +44,5 @@
 (bot/defcommand leave-event
   [client message]
   "Allows an attendee to leave an event they joined. !leave-event event-name"
-  (event-hander/remove-attendee (event-handler/parse-leave-event message))
+  (event-handler/remove-attendee (event-handler/parse-leave-event message))
   (bot/pm (format "You have successully left the event %s." (:content message))))
