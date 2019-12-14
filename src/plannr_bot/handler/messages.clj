@@ -76,7 +76,6 @@
   (def parsed (handle-seq-output result))
   parsed)
 
-
 (defn parse-leave-event
   "Handles parsing a discord message object for leave event."
   [message-object]
