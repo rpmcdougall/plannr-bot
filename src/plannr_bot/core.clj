@@ -51,7 +51,6 @@
   [client message]
   "Allows a user to list the attendees for a given event !roster event-name"
   (def event-roster (event-handler/fetch-attendees (event-handler/parse-basic message)))
-  (clojure.pprint/pprint event-roster)
   (bot/pm (-> (embeds/create-embed :title (:content message)
                                    :color (utils/rgb->integer 0 255 255))
               (embeds/+field "Roster" event-roster))))
