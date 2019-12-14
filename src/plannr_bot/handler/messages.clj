@@ -24,13 +24,12 @@
 (defn parse-event
   "Handles parsing from discord message data into an event object."
   [message-object]
- (let [split-event (str/split (:content message-object) #"\|")
-       user (:username (:author message-object))
-       event-name (trim-outer (get split-event 0))
-       event-time (trim-outer (get split-event 1))
-       event-object {:host user :event_name event-name :event_time event-time }]
-   event-object))
-
+  (let [split-event (str/split (:content message-object) #"\|")
+        user (:username (:author message-object))
+        event-name (trim-outer (get split-event 0))
+        event-time (trim-outer (get split-event 1))
+        event-object {:host user :event_name event-name :event_time event-time}]
+    event-object))
 
 (defn publish-event
   [event-object]
@@ -42,7 +41,6 @@
                    :event_time  (f/parse (f/formatter "MM/dd/YYYY HH:mm") (:event_time event-object))}]
     (update (sql/insert-event db new-event) :event_time c/to-string)))
 
-
 (defn parse-join
   "Handles parsing from discord message for join event"
   [message-object]
@@ -51,7 +49,7 @@
     event-object))
 
 (defn parse-cancel
-  "Handles parsing from discord message for cancel event"
+  "Handles parsing from discord message for cancel-event."
   [message-object]
   (let [event-object {:event_name (trim-outer (:content message-object))}]
     event-object))
@@ -78,7 +76,17 @@
   (def parsed (handle-seq-output result))
   parsed)
 
+(defn parse-leave-event
+  "Handles parsing a discord message object for leave event."
+  [message-object]
+  (let [event-object {:event_name (:content message-object)
+                      :attendee (:username (:author message-object))}]
+    event-object))
 
+(defn remove-attendee
+  [event-object]
+  "Removes an attendee from an event."
+  (sql/delete-attendee-by-event-name db event-object))
 
 
 

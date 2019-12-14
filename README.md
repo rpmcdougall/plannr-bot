@@ -62,18 +62,25 @@ Example: !plan-event Fragfest | 12/10/2019 05:00
 Join Event: Allows user to add themselves as an attendee to an event and PM's the attendee back with the details
 ```
 !join-event <event-name>
-Example !join-event Hackathon December 2019
+Example: !join-event Hackathon December 2019
 ```
 
 List Events: Allows user to list all available events in plannr-bot and PM's the requestor back with the details
 ```
 !list-events 
-Example !list-events
+Example: !list-events
 ```
 
 Cancel Event: Allows user to cancel event and PM's the scheduler back with the details
 ```
 !cancel-event <event-name>
-Example !join-event Hackathon December 2019
+Example: !cancel-event Hackathon December 2019
 ```
+
+Leave Event: Allows a user to leave an event that they have joined.
+```
+!leave-event: <event-name>
+Example: !leave-event Hackathon December 2019
+```
+
 
