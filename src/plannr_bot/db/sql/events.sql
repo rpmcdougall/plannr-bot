@@ -45,3 +45,11 @@ delete from plannr_event where event_name = :event_name
 update plannr_event
 set attendees = array_remove(attendees, :attendee)
 where event_name = :event_name
+
+-- A ":result" value of ":*" specifies a vector of records
+-- (as hashmaps) will be returned
+-- :name fetch-attendees-by-event :? :*
+-- :doc Fetches all attendees for a given event
+SELECT attendees
+FROM plannr_event
+WHERE event_name = :event_name
