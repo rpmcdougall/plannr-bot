@@ -29,6 +29,12 @@
   (is (= (:event_name result) "Test Event"))
   (is (= (:attendee result)  ["leetgamer1337"])))
 
+(deftest parse-leave-event
+  "Tests parsing of leave event command"
+  (def result (plannr-bot.handler.messages/parse-leave-event {:content "Test Event" :author {:username "leetgamer1337"}}))
+  (is (= (:event_name result) "Test Event"))
+  (is (= (:attendee result) "leetgamer1337")))
+
 (deftest mk-map-string
   "Tests parsing of event listing into string output"
   (def result (plannr-bot.handler.messages/mk-map-string {:event_name "Smoked BBQ Pit Extravaganza"
