@@ -38,7 +38,7 @@
 (bot/defcommand cancel-event
   [client message]
   "Cancels and existing event. !cancel-event event-name"
-  (event-handler/cancel-event (event-handler/parse-cancel message))
+  (event-handler/cancel-event (event-handler/parse-basic message))
   (bot/pm (format "Your event %s has been cancelled." (:content message))))
 
 (bot/defcommand leave-event
@@ -46,3 +46,13 @@
   "Allows an attendee to leave an event they joined. !leave-event event-name"
   (event-handler/remove-attendee (event-handler/parse-leave-event message))
   (bot/pm (format "You have successully left the event %s." (:content message))))
+
+(bot/defcommand roster
+  [client message]
+  "Allows a user to list the attendees for a given event !roster event-name"
+  (def event-roster (event-handler/fetch-attendees (event-handler/parse-basic message)))
+  (clojure.pprint/pprint event-roster)
+  (bot/pm (-> (embeds/create-embed :title (:content message)
+                                   :color (utils/rgb->integer 0 255 255))
+              (embeds/+field "Roster" event-roster))))
+

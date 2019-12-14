@@ -77,10 +77,16 @@ Cancel Event: Allows user to cancel event and PM's the scheduler back with the d
 Example: !cancel-event Hackathon December 2019
 ```
 
-Leave Event: Allows a user to leave an event that they have joined.
+Leave Event: Allows a user to leave an event that they have joined and PM's the requestor back with the details
 ```
-!leave-event: <event-name>
+!leave-event <event-name>
 Example: !leave-event Hackathon December 2019
+```
+
+Roster: Allows a user to list the attendees for an event and PM's the requestor back with the details
+```
+!roster <event-name>
+Example: !roster Hackathon December 2019
 ```
 
 
